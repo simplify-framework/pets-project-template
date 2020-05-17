@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install simplify-codegen
+    - run: npm install -g simplify-codegen
     - run: simplify-codegen petsample
     - run: simplify-codegen generate -i openapi.yaml
     - run: npm install

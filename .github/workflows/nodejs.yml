@@ -28,4 +28,4 @@ jobs:
     - run: simplify-codegen petsample
     - run: simplify-codegen generate -i openapi.yaml
     - run: npm install
-    - run: npm test-units
+    - run: npm run test-units

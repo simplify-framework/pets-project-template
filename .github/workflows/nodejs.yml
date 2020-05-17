@@ -24,6 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g simplify-codegen
     - run: simplify-codegen petsample -p 33452827
+    - run: echo -e "\nx-project-id: 33452827" >> openapi.yaml
     - run: simplify-codegen generate -i openapi.yaml  -o .
     - run: cd projectPets && npm install && npm run test-units
     - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env
@@ -38,6 +39,7 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         role-session-name: PetSampleSessionName
         role-duration-seconds: 1200
+    - run: npm install
     - run: npm run stack-deploy
     #- run: npm run push-code
     #- run: cd projectPets && npm install && npm run test-apis

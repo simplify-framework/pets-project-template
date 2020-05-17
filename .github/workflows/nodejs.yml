@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [10.x, 12.x]
@@ -28,3 +26,13 @@ jobs:
     - run: simplify-codegen petsample
     - run: simplify-codegen generate -i openapi.yaml  -o .
     - run: cd projectPets && npm install && npm run test-units
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-1
+    - run: npm run stack-deploy
+    - run: npm run push-code
+    - run: npm run push-update
+    - run: npm run stack-destroy

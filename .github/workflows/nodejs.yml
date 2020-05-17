@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g simplify-codegen
-    - run: simplify-codegen petsample
+    - run: simplify-codegen petsample -p 33452827
     - run: simplify-codegen generate -i openapi.yaml  -o .
     - run: cd projectPets && npm install && npm run test-units
     - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env
@@ -38,7 +38,7 @@ jobs:
         role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
         role-session-name: PetSampleSessionName
         role-duration-seconds: 1200
-    #- run: npm run stack-deploy
+    - run: npm run stack-deploy
     #- run: npm run push-code
     #- run: cd projectPets && npm install && npm run test-apis
     #- run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env

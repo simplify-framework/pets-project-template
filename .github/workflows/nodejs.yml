@@ -26,6 +26,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g simplify-codegen
     - run: simplify-codegen petsample
-    - run: simplify-codegen generate -i openapi.yaml
-    - run: cd projectPets && npm install
-    - run: npm run test-units
+    - run: simplify-codegen generate -i openapi.yaml  -o .
+    - run: cd projectPets && npm install && npm run test-units

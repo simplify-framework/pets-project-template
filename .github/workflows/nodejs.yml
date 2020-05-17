@@ -40,8 +40,8 @@ jobs:
         role-duration-seconds: 1200
     - run: npm install
     - run: npm run stack-deploy
-    #- run: npm run push-code
-    #- run: cd projectPets && npm install && npm run test-apis
+    - run: npm run push-code
+    - run: cd projectPets && npm install && npm run test-apis
     #- run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env
     #- run: cat .env
     #- run: npm run push-update

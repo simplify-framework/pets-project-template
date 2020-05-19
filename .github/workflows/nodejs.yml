@@ -42,8 +42,11 @@ jobs:
     - run: npm run stack-deploy
     - run: npm run push-code
     - run: npm run test
-    #- run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=canary/' .env
-    #- run: cat .env
-    #- run: npm run push-update
-    #- run: cd projectPets && npm install && npm run test-apis
+    - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=enforce/' .env
+    - run: sed -i '/^ENV_functionForPets_ENFORCEMENT_PACKAGE/s/=.*$/=function-for-pets-v10/' .env
+    - run: npm run push-code
+    - run: npm run test
+    - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=canary/' .env
+    - run: npm run push-update
+    - run: npm run test-apis
     - run: npm run stack-destroy

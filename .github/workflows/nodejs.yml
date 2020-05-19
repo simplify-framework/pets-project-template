@@ -24,6 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g simplify-codegen
     - run: simplify-codegen petsample -p 33452827
+    - run: sed -i '/^x-deployment-profile/s/:.*$/:\ \'\'/' openapi.yaml
     - run: simplify-codegen generate -i openapi.yaml -p 33452827 -a 636275562948 -o .
     - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env
     - run: cat .env

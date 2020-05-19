@@ -23,9 +23,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g simplify-codegen
-    - run: simplify-codegen petsample -p 66640738
+    - run: simplify-codegen petsample -p ${{ secrets.PROJECT_ID }}
     - run: sed -i '/^x-deployment-profile:/d' openapi.yaml
-    - run: simplify-codegen generate -i openapi.yaml -p 66640738 -a ${{ secrets.AWS_ACCOUNT_ID }} -o .
+    - run: simplify-codegen generate -i openapi.yaml -p ${{ secrets.PROJECT_ID }} -a ${{ secrets.AWS_ACCOUNT_ID }} -o .
     - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env
     - run: cat .env
     - name: Configure AWS credentials
@@ -42,7 +42,7 @@ jobs:
     - run: npm run stack-deploy
     - run: npm run push-code
     - run: npm run test
-    #- run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=stable/' .env
+    #- run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=canary/' .env
     #- run: cat .env
     #- run: npm run push-update
     #- run: cd projectPets && npm install && npm run test-apis

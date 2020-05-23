@@ -21,12 +21,12 @@
 
 - Execute the following commands under root credentials to create Github user account:
   + Generate `petsample` with `simplify-codegen` command lines
-    + npm install -g simplify-codegen
-    + simplify-codegen template -i petsample
-    + simplify-codegen generate -i openapi.yaml -p `66640738` -a `your_aws_account_id`
+    + `npm install -g simplify-codegen`
+    + `simplify-codegen template -i petsample`
+    + `simplify-codegen generate -i openapi.yaml -p 66640738 -a your_aws_account_id`
     
     > It will generate the wole project template with an openapi.yaml sample and five policy documents
-    
+
   + Create a Github user account with Assume Role permission only:
     + `aws iam create-user --user-name GithubUserForPets`
     + `aws iam put-user-policy --user-name GithubUserForPets --policy-name GithubUserAccessRole --policy-document policy-assume-role.json` 
@@ -48,6 +48,7 @@
     + `AWS_ROLE_TO_ASSUME` with the ARN of `ProjectPetsDemoRole` created by step 2 with `create-role`
     + `PROJECT_ID` with the choosen number of the first step, it is: `66640738`
       
-**4. Go to Github Actions and re-run all jobs**
+**4. Go to Github Actions and re-run the failed jobs**
 
-  > The CI/CD flow will generate code, deploy stack, push function code and run all tests...
+  + You can trigger this CI/CD flows by any pull_request or push to the master branch
+  > The CI/CD flow will re-generate code, deploy stack, push function code and run all tests...

@@ -32,15 +32,18 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         role-session-name: GitHubCISession
         role-duration-seconds: 1200
+    - run: npm install -g simplify-codegen
+    - run: simplify-codegen generate -i openapi.yaml -p ${{ secrets.PROJECT_ID }} -a ${{ secrets.AWS_ACCOUNT_ID }}
     - run: npm install
+    - run: npm run test-units
     - run: npm run stack-deploy
     - run: npm run push-code
-    - run: npm run test
+    - run: npm run test-apis
     - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=enforce/' .env
     - run: sed -i '/^ENV_functionForPets_ENFORCEMENT_PACKAGE/s/=.*$/=function-for-pets-v10/' .env
     - run: npm run push-code
-    - run: npm run test
-    #- run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=canary/' .env
-    #- run: npm run push-update
-    #- run: npm run test-apis
+    - run: npm run test-apis
+    - run: sed -i '/^ENV_functionForPets_DEPLOYMENT_STAGE/s/=.*$/=canary/' .env
+    - run: npm run push-update
+    - run: npm run test-apis
     - run: npm run stack-destroy

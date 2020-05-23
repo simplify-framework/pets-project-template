@@ -3,7 +3,7 @@
 **1. Use pets-project template repository**
 
 - Click on `Use Template` button or https://github.com/simplify-framework/pets-project-template/generate
-- Name your project as https://github.com/`your_github_account`/`pets-project`
+- Name your project URL as https://github.com/your_github_account/pets-project
 - Click on `Actions` tab to see the predefined CI/CD flow runs with error.
 
 **2. Setup CI/CD flows with your AWS account**
@@ -12,20 +12,20 @@
   + A root credentials must have the following permissions to create Github user account:
     + iam:CreateUser
     + iam:CreateRole
-    + iam:CreatePolicy
-    + iam:UpdateUserPolicy
+    + iam:PutUserPolicy
+    + iam:PutRolePolicy
 
 - Prepare a Project Id and AWS Account ID
-  + Choose a random number for project Id: e.g: `66640738`
+  + Choose a random number for your project Id: (e.g: `66640738`)
   + Find your ASW Account ID https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId
 
 - Execute the following commands under root credentials to create Github user account:
   + Generate `petsample` with `simplify-codegen` command lines
     + `npm install -g simplify-codegen`
     + `simplify-codegen template -i petsample`
-    + `simplify-codegen generate -i openapi.yaml -p 66640738 -a your_aws_account_id`
-    
-    > It will generate the wole project template with an openapi.yaml sample and five policy documents
+    + `simplify-codegen generate -i openapi.yaml -p your_project_id -a your_aws_account_id`
+  
+  > It will generate the wole project template with an openapi.yaml sample and five policy documents
 
   + Create a Github user account with Assume Role permission only:
     + `aws iam create-user --user-name GithubUserForPets`
@@ -40,7 +40,7 @@
 
   + Generate Access Key crediential for Github user account, notes this key to use for the next step
     + `aws iam create-access-key --user-name GithubUserForPets`
-  + Go to https://github.com/`your_github_account`/pets-project/settings/secrets
+  + Go to https://github.com/your_github_account/pets-project/settings/secrets
     + `AWS_ACCESS_KEY_ID` then update the access key ID from step above
     + `AWS_SECRET_ACCESS_KEY` then update the secret key from step above
     + `AWS_ACCOUNT_ID` with your AWS Account ID number (e.g: 1234567890)

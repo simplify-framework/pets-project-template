@@ -207,5 +207,3 @@ paths:
                 type: object
 servers:
   - url: /
-x-project-id: "66640738"
-x-api-key: 158fd3971e104ad6649537e01dc4ea6724ded7fe

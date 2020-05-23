@@ -15,10 +15,18 @@
     + iam:CreatePolicy
     + iam:UpdateUserPolicy
 
+- Prepare a Project Id and AWS Account ID
+  + Choose a random number for project Id: e.g: `66640738`
+  + Find your ASW Account ID https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId
+
 - Execute the following commands under root credentials to create Github user account:
-  + Generate `petsample` with `simplify-codegen`
-    + simplify-codegen template -i petsample -p `66640738` -a `your_aws_account_id`
-    > It will generate an openapi.yaml sample and five policy documents
+  + Generate `petsample` with `simplify-codegen` command lines
+    + npm install -g simplify-codegen
+    + simplify-codegen template -i petsample
+    + simplify-codegen generate -i openapi.yaml -p `66640738` -a `your_aws_account_id`
+    
+    > It will generate the wole project template with an openapi.yaml sample and five policy documents
+    
   + Create a Github user account with Assume Role permission only:
     + `aws iam create-user --user-name GithubUserForPets`
     + `aws iam put-user-policy --user-name GithubUserForPets --policy-name GithubUserAccessRole --policy-document policy-assume-role.json` 
@@ -38,8 +46,7 @@
     + `AWS_ACCOUNT_ID` with your AWS Account ID number (e.g: 1234567890)
     + `AWS_ROLE_EXTERNAL_ID` with `project-pets-demo-external-id`
     + `AWS_ROLE_TO_ASSUME` with the ARN of `ProjectPetsDemoRole` created by step 2 with `create-role`
-    + `PROJECT_ID` with the default number is: `66640738` 
-      (if you change this number, you must change two s3 resource arns in `policy-deployment.json`)
+    + `PROJECT_ID` with the choosen number of the first step, it is: `66640738`
       
 **4. Go to Github Actions and re-run all jobs**
 

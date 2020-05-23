@@ -45,7 +45,7 @@
 	+  `aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-services.json`
 	+  `aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-execute-api.json`
 
-> NOTE: Simplify Framework pre-generate these policy documents with a least privilege restricted access to your pets-project resource only. The restriction setup is based on openapi.yaml `x-api-service-name` along with your Project Name, Project ID and AWS Account ID followed by the principal of Security by Design.
+> NOTE: Simplify Framework pre-generate these policy documents with a least privilege restricted access to your pets-project resource only. The restriction setup is based on openapi.yaml `x-api-service-name` along with your Project Name, Project ID and AWS Account ID - Respecting to the principal of Security by Design.
 
 **3. Setup Github Actions Secrets**
 

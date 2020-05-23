@@ -16,7 +16,7 @@
 		
 > WARNING: DONOT expose this root credentials to Github Secrets.
 
-- Prepare a Project Id and AWS Account ID
+- Prepare a Project ID and AWS Account ID
 	+ Choose a random number for your project Id: (e.g: `66640738`)
 	+ Find your AWS Account ID https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId
 
@@ -67,3 +67,28 @@
 + You can trigger this CI/CD flows by any pull_request or push to the master branch
 
 > The CI/CD flow will re-generate code, deploy stack, push function code and run all tests...
+
+**5. Tip: develop your code while re-generating project without overriden or lost with `--ignores` option
+
+  + Create/Udpate your files: `my-service-code.js` and `my-service-data.spec.js`
+  + Edit `devops.yaml` Github Actions flow from:
+    - `simplify-codegen generate -i openapi.yaml -p ${{ secrets.PROJECT_ID }} -a ${{ secrets.AWS_ACCOUNT_ID }}`
+  + To (with --ignores option):
+    - `simplify-codegen generate -i openapi.yaml -p ${{ secrets.PROJECT_ID }} -a ${{ secrets.AWS_ACCOUNT_ID }}--ignores=my-service-code.js;my-service-data.spec.js`
+  
+> NOTE: you can run your tests locally by setting up AWS Credentials in your PC with a Profle: `simplify-eu`
+
+  + ~/.aws/config
+  ```bash
+  [profile simplify-eu]
+  role_arn=arn:aws:iam::1234567890:role/ProjectPetsDemoRole
+  source_profile=github-user
+  external_id=ProjectPetsDemo-66640738
+  ```
+
+  + ~/.aws/credentials
+  ```bash
+  [github-user]
+  aws_access_key_id = ProjectPetsDemo_access_key_id
+  aws_secret_access_key = ProjectPetsDemo_secret_key
+  ```

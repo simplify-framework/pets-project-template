@@ -68,7 +68,7 @@
 
 > The CI/CD flow will re-generate code, deploy stack, push function code and run all tests...
 
-**5. Tip: develop your code while re-generating project without overriden or lost with `--ignores` option
+**5. Tip: develop your code while re-generating project without overriden or lost with `--ignores` option**
 
   + Create/Udpate your files: `my-service-code.js` and `my-service-data.spec.js`
   + Edit `devops.yaml` Github Actions flow from:

@@ -17,7 +17,7 @@
 
 - Prepare a Project Id and AWS Account ID
   + Choose a random number for your project Id: (e.g: `66640738`)
-  + Find your ASW Account ID https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId
+  + Find your AWS Account ID https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId
 
 - Execute the following commands under root credentials to create Github user account:
   + Generate `petsample` with `simplify-codegen` command lines

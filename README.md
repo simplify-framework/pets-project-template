@@ -14,7 +14,7 @@
 	+ iam:PutUserPolicy
 	+ iam:PutRolePolicy
 		
-	> WARNING: DONOT expose this root credentials to Github Secrets.
+> WARNING: DONOT expose this root credentials to Github Secrets.
 
 - Prepare a Project Id and AWS Account ID
 	+ Choose a random number for your project Id: (e.g: `66640738`)

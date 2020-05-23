@@ -26,11 +26,11 @@
     + `simplify-codegen generate -i openapi.yaml -p your_project_id -a your_aws_account_id`
   
     It will generate the wole project template with an `openapi.yaml` sample and five policy documents
-      + `policy-assume-role.json` is the permission for Github user account can assume a specific action role
-      + `policy-relationship-role.json` a trust relationship between Github account and the `ProjectPetsDemoRole` action role
-      + `policy-deployment.json` is the action policy that allows cloudformation to create resources for pets-project
-      + `policy-services.json` is the action policy that allows cloudformation to setup resources for pets-project
-      + `policy-execute-api.json` is the action policy that allows CI/CD flow can run test-apis with IAM Sigv4 authorization
+      + `policy-assume-role.json` is the permission for Github user account `ProjectPetsDemo` can assume a specific action role
+      + `policy-relationship-role.json` a trust relationship between Github user account `ProjectPetsDemo` and the `ProjectPetsDemoRole` action role
+      + `policy-deployment.json` is the action policy of `ProjectPetsDemoRole` that allows cloudformation to create resources for pets-project
+      + `policy-services.json` is the action policy of `ProjectPetsDemoRole` that allows cloudformation to setup resources for pets-project
+      + `policy-execute-api.json` is the action policy of `ProjectPetsDemoRole` that allows CI/CD flow can run test-apis with IAM Sigv4 authorization
 
   + Create a Github user account with Assume Role permission only:
     + `aws iam create-user --user-name ProjectPetsDemo`

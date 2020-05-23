@@ -25,7 +25,12 @@
     + `simplify-codegen template -i petsample`
     + `simplify-codegen generate -i openapi.yaml -p your_project_id -a your_aws_account_id`
   
-  > It will generate the wole project template with an openapi.yaml sample and five policy documents
+    It will generate the wole project template with an `openapi.yaml` sample and five policy documents
+      + policy-assume-role.json: the permission for Github user account can assume a specific action role
+      + policy-relationship-role.json a trust relationship between Github account and the `ProjectPetsDemoRole` action role
+      + policy-deployment.json is the action policy that allows cloudformation to create resources for pets-project
+      + policy-services.json is the action policy that allows cloudformation to setup resources for pets-project
+      + policy-execute-api.json is the action policy that allows CI/CD flow can run test-apis with IAM Sigv4 authorization
 
   + Create a Github user account with Assume Role permission only:
     + `aws iam create-user --user-name ProjectPetsDemo`
@@ -41,8 +46,8 @@
   + Generate Access Key crediential for Github user account, notes this key to use for the next step
     + `aws iam create-access-key --user-name ProjectPetsDemo`
   + Go to https://github.com/your_github_account/pets-project/settings/secrets
-    + `AWS_ACCESS_KEY_ID` then update the access key ID from step above
-    + `AWS_SECRET_ACCESS_KEY` then update the secret key from step above
+    + `AWS_ACCESS_KEY_ID` with value is the access key ID from step above
+    + `AWS_SECRET_ACCESS_KEY` with value is the secret key from step above
     + `AWS_ACCOUNT_ID` with your AWS Account ID number (e.g: 1234567890)
     + `AWS_ROLE_EXTERNAL_ID` with `ProjectPetsDemo-66640738` the same with policy-relationship-role.json
     + `AWS_ROLE_TO_ASSUME` with the ARN of `ProjectPetsDemoRole` created by step 2 with `create-role`

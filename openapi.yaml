@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: The pet project with serverless pattern
+x-project-name: project-pets
+x-deployment-name: project-pets-demo
+x-deployment-region: eu-west-1
+x-deployment-profile: simplify-eu
+x-api-gateway-name: api-gateway-restapi-name
+x-api-rate-limit: 100
+x-api-quota-limit: 1000
+x-api-quota-unit: DAY
+x-api-burst-limit: 1000
+paths:
+  /shopping/pets:
+    x-api-service-name: function-for-buy-pets
+    x-api-service-template: flatted
+    x-api-service-public: true
+    get:
+      responses:
+        "200":
+          description: Success
+  /etranger/pets:
+    x-api-service-name: function-for-etranger-pets
+    x-api-service-template: flatted
+    x-api-service-runtime: python3.7
+    x-api-service-public: true
+    get:
+      responses:
+        "200":
+          description: Success
+  /events/feed-pets:
+    x-event-service-schedule: rate(10 days)
+    x-event-service-public: false
+    x-event-service-name: event-function-for-pets
+    x-event-service-template: flatted
+    x-event-service-key-vault: false
+    put:
+      description: Run on event operation, method is not used
+      responses:
+        "200":
+          description: Success
+  /pets:
+    x-api-service-public: true
+    x-api-service-name: function-for-pets
+    x-api-service-authorizer: false
+    x-api-service-api-key: false
+    x-api-service-tag: devel
+    get:
+      tags:
+        - Pets Service Group
+      description: Get Pets Information
+      operationId: getPets
+      parameters:
+        - name: cats
+          in: query
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: Success
+    post:
+      x-api-service-name: function-for-pets
+      tags:
+        - Pets Service Group
+      description: Create Pets Information
+      operationId: createPet
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dataObject:
+                  type: object
+      responses:
+        "200":
+          description: Success
+    put:
+      x-api-service-name: function-for-pets
+      tags:
+        - Pets Service Group
+      description: Update Pets Information
+      operationId: updatePet
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dataObject:
+                  type: object
+      responses:
+        "200":
+          description: Success
+  "/pets/{id}/feed/{count}":
+    x-api-service-public: true
+    x-api-service-name: function-for-pets
+    x-api-service-model-name: pets-foods
+    x-api-service-authorizer: false
+    x-api-service-api-key: false
+    x-api-service-tag: devel
+    get:
+      tags:
+        - Pets Service Group
+      description: Feed your pet by id with food count
+      operationId: feedPetById
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: count
+          in: path
+          schema:
+            type: integer
+          required: true
+        - name: diet
+          in: query
+          schema:
+            type: boolean
+          required: false
+      responses:
+        "200":
+          description: Success
+  "/people/pets/{id}":
+    x-api-service-public: true
+    x-api-service-authorizer: true
+    x-api-service-api-key: false
+    x-api-service-name: function-for-people
+    x-api-service-model-name: people-pets
+    x-api-service-control: true
+    post:
+      x-control-service-timeout: 60000
+      x-control-service-duration: 30000
+      x-control-service-threshold: 0.1
+      tags:
+        - Pets Service Group
+      description: Create Pets Information By Id
+      operationId: linkPetToPerson
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: filter
+          schema:
+            type: string
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                foo:
+                  type: string
+      responses:
+        "200":
+          description: Success
+  /people:
+    x-api-service-name: function-for-people
+    x-api-service-model-name: people
+    x-api-service-authorizer: true
+    get:
+      tags:
+        - People Service Group
+      description: Get People Information
+      operationId: getPeople
+      responses:
+        "200":
+          description: Success
+    put:
+      tags:
+        - People Service Group
+      description: Update People Information
+      operationId: putPeople
+      responses:
+        "200":
+          description: Success
+    post:
+      tags:
+        - People Service Group
+      description: Create People Information By Id
+      operationId: createPeople
+      responses:
+        "200":
+          description: Success
+  /hystrix.stream:
+    get:
+      description: hystrix server-sent event stream
+      responses:
+        "200":
+          description: hystrix server-sent event response
+          content:
+            text/event-stream:
+              schema:
+                type: object
+servers:
+  - url: /
+x-project-id: "66640738"
+x-api-key: 158fd3971e104ad6649537e01dc4ea6724ded7fe

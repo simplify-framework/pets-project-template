@@ -21,9 +21,11 @@
 	+ Find your AWS Account ID https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId
 
 + Generate `petsample` with `simplify-codegen` command lines
-	+  `npm install -g simplify-codegen`
-	+  `simplify-codegen template -i petsample`
-	+  `simplify-codegen generate -i openapi.yaml -p your_project_id -a your_aws_account_id`
+	```bash
+	npm install -g simplify-codegen
+	simplify-codegen template -i petsample
+	simplify-codegen generate -i openapi.yaml -p your_project_id -a your_aws_account_id
+	```
 
 	It will generate the whole project template with an `openapi.yaml` sample and five policy documents
 
@@ -36,15 +38,19 @@
 	| `policy-execute-api.json` | is the action policy of `ProjectPetsDemoRole` that allows Github CI/CD flow can run `test-apis` against API Gateway with IAM Sigv4 authorization mode |
 
 + Create a Github user account with assume role permission only:
-	+  `aws iam create-user --user-name ProjectPetsDemo`
-	+  `aws iam put-user-policy --user-name ProjectPetsDemo --policy-name GithubUserAccessRole --policy-document policy-assume-role.json`
+	```bash
+	aws iam create-user --user-name ProjectPetsDemo
+	aws iam put-user-policy --user-name ProjectPetsDemo --policy-name GithubUserAccessRole --policy-document policy-assume-role.json
+	```
 
 + Create a role with limited permission for `pets-project` resources only:
-	+  `aws iam create-role --role-name ProjectPetsDemoRole --assume-role-policy-document policy-relationship-role.json`
-	+  `aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-deployment.json`
-	+  `aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-services.json`
-	+  `aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-execute-api.json`
-
+	```bash
+	aws iam create-role --role-name ProjectPetsDemoRole --assume-role-policy-document policy-relationship-role.json
+	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-deployment.json
+	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-services.json
+	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-execute-api.json
+	```
+	
 > NOTE: Simplify Framework pre-generate these policy documents with a least privilege restricted access to your pets-project resource only. The restriction setup is based on openapi.yaml `x-api-service-name` along with your Project Name, Project ID and AWS Account ID - Respecting to the principal of Security by Design.
 
 **3. Setup Github Actions Secrets**

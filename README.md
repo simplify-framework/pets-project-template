@@ -2,13 +2,15 @@
 
 1. Use pets-project template repository
 =======================================
+
 - Click on `Use Template` button or https://github.com/simplify-framework/pets-project-template/generate
 - Name your project as https://github.com/`your_github_account`/`pets-project`
 - Click on `Actions` tab to see the predefined CI/CD flow runs with error.
 
 2. Setup CI/CD flows with your AWS account
 =======================================
-- Setup your ![root credentials](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) to be used to provision a secure Github credentials 
+
+- Setup your [root credentials](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) to be used to provision a secure Github credentials 
   + A root credentials must have the following permissions to create Github user account:
     + iam:CreateUser
     + iam:CreateRole
@@ -30,6 +32,7 @@
 
 3. Setup Github Actions Secrets
 =======================================
+
   + Generate Access Key crediential for Github user account, notes this key to use for the next step
     + `aws iam create-access-key --user-name GithubUserForPets`
   + Go to https://github.com/`your_github_account`/pets-project/settings/secrets
@@ -42,4 +45,6 @@
       (if you change this number, you must change two s3 resource arns in `policy-deployment.json`)
       
 4. Go to Github Actions and re-run all jobs
+=======================================
+
   > The CI/CD flow will generate code, deploy stack, push function code and run all tests...

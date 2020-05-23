@@ -72,9 +72,9 @@
 
   + Create/Udpate your files: `my-service-code.js` and `my-service-data.spec.js`
   + Edit `devops.yaml` Github Actions flow from:
-    - `simplify-codegen generate -i openapi.yaml -p ${{ secrets.PROJECT_ID }} -a ${{ secrets.AWS_ACCOUNT_ID }}`
+    - `simplify-codegen generate -i openapi.yaml -p ... -a ...`
   + To (with --ignores option):
-    - `simplify-codegen generate -i openapi.yaml -p ${{ secrets.PROJECT_ID }} -a ${{ secrets.AWS_ACCOUNT_ID }}--ignores=my-service-code.js;my-service-data.spec.js`
+    - `simplify-codegen generate -i openapi.yaml ... --ignores=my-service-code.js;my-service-data.spec.js`
   
 > NOTE: you can run your tests locally by setting up AWS Credentials in your PC with a Profle: `simplify-eu`
 

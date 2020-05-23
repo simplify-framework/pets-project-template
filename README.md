@@ -1,8 +1,8 @@
-### HOWTO run a pets-project
+### HOW TO: Run your pets-project in a minute
 
 **1. Use pets-project template repository**
 
-- Click on `Use Template` button or https://github.com/simplify-framework/pets-project-template/generate
+- Click on `Use this template` button or https://github.com/simplify-framework/pets-project-template/generate
 - Name your project URL as https://github.com/your_github_account/pets-project
 - Click on `Actions` tab to see the predefined CI/CD flow runs with error.
 
@@ -28,8 +28,8 @@
   > It will generate the wole project template with an openapi.yaml sample and five policy documents
 
   + Create a Github user account with Assume Role permission only:
-    + `aws iam create-user --user-name GithubUserForPets`
-    + `aws iam put-user-policy --user-name GithubUserForPets --policy-name GithubUserAccessRole --policy-document policy-assume-role.json` 
+    + `aws iam create-user --user-name ProjectPetsDemo`
+    + `aws iam put-user-policy --user-name ProjectPetsDemo --policy-name GithubUserAccessRole --policy-document policy-assume-role.json` 
   + Create a role with limited permission for `pets-project` resources only:
     + `aws iam create-role --role-name ProjectPetsDemoRole --assume-role-policy-document policy-relationship-role.json`
     + `aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-deployment.json`
@@ -39,7 +39,7 @@
 **3. Setup Github Actions Secrets**
 
   + Generate Access Key crediential for Github user account, notes this key to use for the next step
-    + `aws iam create-access-key --user-name GithubUserForPets`
+    + `aws iam create-access-key --user-name ProjectPetsDemo`
   + Go to https://github.com/your_github_account/pets-project/settings/secrets
     + `AWS_ACCESS_KEY_ID` then update the access key ID from step above
     + `AWS_SECRET_ACCESS_KEY` then update the secret key from step above

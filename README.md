@@ -44,7 +44,7 @@
     + `AWS_ACCESS_KEY_ID` then update the access key ID from step above
     + `AWS_SECRET_ACCESS_KEY` then update the secret key from step above
     + `AWS_ACCOUNT_ID` with your AWS Account ID number (e.g: 1234567890)
-    + `AWS_ROLE_EXTERNAL_ID` with `project-pets-demo-external-id`
+    + `AWS_ROLE_EXTERNAL_ID` with `ProjectPetsDemo-66640738`
     + `AWS_ROLE_TO_ASSUME` with the ARN of `ProjectPetsDemoRole` created by step 2 with `create-role`
     + `PROJECT_ID` with the choosen number of the first step, it is: `66640738`
       

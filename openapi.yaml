@@ -20,12 +20,18 @@ paths:
       responses:
         "200":
           description: Success
-  /etranger/pets:
+  "/etranger/pets/{id}":
     x-api-service-name: function-for-etranger-pets
     x-api-service-template: flatted
     x-api-service-runtime: python3.7
     x-api-service-public: true
     get:
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         "200":
           description: Success
@@ -207,3 +213,5 @@ paths:
                 type: object
 servers:
   - url: /
+x-project-id: 95448430
+x-api-key: 41f45a5450dff588b598903e95df4af3a256cea9

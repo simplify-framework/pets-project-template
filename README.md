@@ -40,15 +40,15 @@
 + Create a Github user account with assume role permission only:
 	```bash
 	aws iam create-user --user-name ProjectPetsDemo
+	aws iam create-role --role-name ProjectPetsDemoRole --assume-role-policy-document file://policy-relationship-role.json
 	aws iam put-user-policy --user-name ProjectPetsDemo --policy-name GithubUserAccessRole --policy-document policy-assume-role.json
 	```
 
-+ Create a role with limited permission for `pets-project` resources only:
++ Create a role policy with limited permission for `pets-project` resources only:
 	```bash
-	aws iam create-role --role-name ProjectPetsDemoRole --assume-role-policy-document policy-relationship-role.json
-	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-deployment.json
-	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-services.json
-	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document policy-execute-api.json
+	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document file://policy-deployment.json
+	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document file://policy-services.json
+	aws iam put-role-policy --role-name ProjectPetsDemoRole --policy-name ProjectPetsDemoRolePolicy --policy-document file://policy-execute-api.json
 	```
 
 > NOTE: Simplify Framework pre-generate these policy documents with a least privilege restricted access to your pets-project resource only. The restriction setup is based on openapi.yaml `x-api-service-name` along with your Project Name, Project ID and AWS Account ID - Respecting to the principal of Security by Design.

@@ -2,9 +2,9 @@
   "name": "simplify-sample",
   "version": "0.1.0",
   "description": "Simplify - Easy Sample",
-  "main": "sample.js",
+  "main": "index.js",
   "bin": {
-    "simplify-sample": "sample.js"
+    "simplify-sample": "index.js"
   },
   "scripts": {},
   "repository": {
